@@ -10,21 +10,50 @@
   <%= @question.content %>
 </p>
 
+<!-- COMENTARIOS CORRESPONDIENTES A UNA PREGUNTA -->
+<p>
+
+
+<h2>Comments</h2>
+<% @question.comments.each do |comment| %>
+  <p>
+    <b>Comment:</b>
+    <%= comment.content %>
+  </p> 
+<% end %>
+
+<!-- CREACION DE UN NUEVO COMENTARIO -->
+
+
+<h2>Add a comment:</h2>
+<%= form_for([@question_answer, Comment.new]) do |f| %>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<!-- RESPUESTAS -->
+
 <h2>Answers</h2>
 <% @question.answers.each do |answer| %>
   <p>
     <b>Answer:</b>
     <%= answer.content %>
-  </p>
-  
+  </p>  
   <p>
   <%= link_to 'Destroy Answer', [answer.question, answer],
                :confirm => 'Are you sure?',
                :method => :delete %>
   </p>
+
+
 <% end %>
 
-<h2>Add a answer:</h2>
+ <h2>Add a answer:</h2>
 <%= form_for([@question, @question.answers.build]) do |f| %>
   <div class="field">
     <%= f.label :content %><br />
