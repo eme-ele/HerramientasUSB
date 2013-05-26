@@ -1,4 +1,13 @@
 class AnswersController < ApplicationController
+  def index
+    @answers = Answer.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @answers }
+    end
+  end
+
   def create
     @question = Question.find(params[:question_id])
     @answer = @question.answers.create(params[:answer])

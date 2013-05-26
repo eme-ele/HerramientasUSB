@@ -11,7 +11,6 @@
 </p>
 
 <!-- COMENTARIOS CORRESPONDIENTES A UNA PREGUNTA -->
-<p>
 
 
 <h2>Comments</h2>
@@ -26,7 +25,7 @@
 
 
 <h2>Add a comment:</h2>
-<%= form_for([@question_answer, Comment.new]) do |f| %>
+<%= form_for([@question, Comment.new]) do |f| %>
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_field :content %>
@@ -49,6 +48,32 @@
                :confirm => 'Are you sure?',
                :method => :delete %>
   </p>
+
+
+<!-- COMENTARIOS CORRESPONDIENTES A UNA RESPUESTA -->
+
+
+<h3>Comments</h3>
+<% answer.comments.each do |comment| %>
+  <p>
+    <b>Comment:</b>
+    <%= comment.content %>
+  </p> 
+<% end %>
+
+<!-- CREACION DE UN NUEVO COMENTARIO -->
+
+
+<h3>Add a comment:</h3>
+<%= form_for([@question, answer, answer.comments.build]) do |f| %>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_field :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 
 <% end %>
