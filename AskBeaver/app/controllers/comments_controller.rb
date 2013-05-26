@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 	def create
 		@question_answer = find_question_answer
 		@comment = @question_answer.comments.create(params[:comment])
-		redirect_to polymorphic_path(@question_answer, :comment)
+		redirect_to question_path(@question_answer)
 	end
 
 	private

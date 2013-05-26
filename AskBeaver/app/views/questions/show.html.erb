@@ -13,10 +13,10 @@
 <!-- COMENTARIOS CORRESPONDIENTES A UNA PREGUNTA -->
 
 
-<h2>Comments</h2>
+<h4>Comments</h4>
 <% @question.comments.each do |comment| %>
   <p>
-    <b>Comment:</b>
+    <!--   <b>Comment:</b>-->
     <%= comment.content %>
   </p> 
 <% end %>
@@ -24,7 +24,7 @@
 <!-- CREACION DE UN NUEVO COMENTARIO -->
 
 
-<h2>Add a comment:</h2>
+<h4>Add a comment:</h4>
 <%= form_for([@question, Comment.new]) do |f| %>
   <div class="field">
     <%= f.label :content %><br />
@@ -50,7 +50,7 @@
   </p>
 
 
-<!-- COMENTARIOS CORRESPONDIENTES A UNA RESPUESTA -->
+<!-- COMENTARIOS CORRESPONDIENTES A UNA RESPUESTA
 
 
 <h3>Comments</h3>
@@ -61,7 +61,8 @@
   </p> 
 <% end %>
 
-<!-- CREACION DE UN NUEVO COMENTARIO -->
+
+ CREACION DE UN NUEVO COMENTARIO 
 
 
 <h3>Add a comment:</h3>
@@ -74,7 +75,7 @@
     <%= f.submit %>
   </div>
 <% end %>
-
+-->
 
 <% end %>
 
