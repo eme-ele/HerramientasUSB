@@ -1,53 +1,65 @@
+<ul id="nav">
+    <li><a href="#signup">Sign Up</a></li>
+    <li><a href="#login">Log In</a></li>
+</ul>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Title:</b>
-  <%= @question.title %>
-</p>
+<div id="questions">
+  <p>
+    <b>Title:</b>
+    <%= @question.title %>
+  </p>
 
-<p>
-  <b>Content:</b>
-  <%= @question.content %>
-</p>
+  <p>
+    <b>Content:</b>
+    <%= @question.content %>
+  </p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
+</div>
 
 <!-- COMENTARIOS CORRESPONDIENTES A UNA PREGUNTA -->
 
-
-<h4>Comments</h4>
-<% @question.comments.each do |comment| %>
-  <p>
-    <!--   <b>Comment:</b>-->
-    <%= comment.content %>
-  </p> 
-<% end %>
+<div id="comments">
+  <h4>Comments</h4>
+  <% @question.comments.each do |comment| %>
+    <p>
+      <!--   <b>Comment:</b>-->
+      <%= comment.content %>
+    </p> 
+  <% end %>
 
 <!-- CREACION DE UN NUEVO COMENTARIO -->
 
 
-<h4>Add a comment:</h4>
-<%= form_for([@question, Comment.new]) do |f| %>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <h4>Add a comment:</h4>
+  <%= form_for([@question, Comment.new]) do |f| %>
+    <div class="field">
+      <%= f.label :content %><br />
+      <%= f.text_field :content %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
 
 <!-- RESPUESTAS -->
 
-<h2>Answers</h2>
-<% @question.answers.each do |answer| %>
-  <p>
-    <b>Answer:</b>
-    <%= answer.content %>
-  </p>  
-  <p>
-  <%= link_to 'Destroy Answer', [answer.question, answer],
-               :confirm => 'Are you sure?',
-               :method => :delete %>
-  </p>
+<div id="answers">
+  <h2>Answers</h2>
+  <% @question.answers.each do |answer| %>
+    <p>
+      <b>Answer:</b>
+      <%= answer.content %>
+    </p>  
+    <p>
+    <%= link_to 'Destroy Answer', [answer.question, answer],
+                 :confirm => 'Are you sure?',
+                 :method => :delete %>
+    </p>
 
 
 <!-- COMENTARIOS CORRESPONDIENTES A UNA RESPUESTA
@@ -77,19 +89,16 @@
 <% end %>
 -->
 
-<% end %>
+  <% end %>
 
- <h2>Add a answer:</h2>
-<%= form_for([@question, @question.answers.build]) do |f| %>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+   <h2>Add a answer:</h2>
+  <%= form_for([@question, @question.answers.build]) do |f| %>
+    <div class="field">
+      <%= f.label :content %><br />
+      <%= f.text_field :content %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>

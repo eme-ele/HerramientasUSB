@@ -6,8 +6,8 @@ html, body, head {
 #nav {
 	width: 100%;
 	background-color:#324AB2;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     text-align:right;
 }
 
@@ -17,14 +17,58 @@ html, body, head {
 }
 
 #nav a:link, a:visited {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 0.9em;
 	display:inline-block;
     padding:10px;
     font-family: verdana;
-    color: #FFFFFF;
-    font-size: 1em;
-    text-decoration: none;
 }
 
 #nav a:hover, a:active{
 	
+}
+
+#link a:link, a:visited {
+    color: #000;
+}
+
+#questions {
+    margin-left: 100px;
+    padding-top: 100px;
+    padding-left: 100px;
+    margin-right: 100px;
+    padding-right: 100px;
+    font-family: verdana;
+    font-size: 1em;
+    font-family: verdana;
+}
+
+#comments {
+    margin-left: 200px;
+    padding-left: 100px;
+    margin-right: 200px;
+    padding-right: 100px;
+    font-family: verdana;
+    font-family: verdana;
+}
+
+#answers {
+    margin-left: 100px;
+    padding-left: 100px;
+    margin-right: 100px;
+    padding-right: 100px;
+    font-family: verdana;
+    font-size: 1em;
+    font-family: verdana;
+}
+
+#title {
+    font-weight: bold;
+    font-family: verdana;
+}
+
+#table_index {
+    border-top: 1px solid;
+    border-color: #e5e5e5;
 }
