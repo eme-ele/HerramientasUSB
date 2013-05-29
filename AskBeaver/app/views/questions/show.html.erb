@@ -24,7 +24,7 @@
 
 <div id="comments">
   <h4>Comments</h4>
-  <% @question.comments.each do |comment| %>
+  <% @question.comment_questions.each do |comment| %>
     <p>
       <!--   <b>Comment:</b>-->
       <%= comment.content %>
@@ -35,7 +35,7 @@
 
 
   <h4>Add a comment:</h4>
-  <%= form_for([@question, Comment.new]) do |f| %>
+  <%= form_for([@question, @question.comment_questions.build]) do |f| %>
     <div class="field">
       <%= f.label :content %><br />
       <%= f.text_field :content %>
@@ -62,11 +62,11 @@
     </p>
 
 
-<!-- COMENTARIOS CORRESPONDIENTES A UNA RESPUESTA
+<!-- COMENTARIOS CORRESPONDIENTES A UNA RESPUESTA -->
 
 
 <h3>Comments</h3>
-<% answer.comments.each do |comment| %>
+<% answer.comment_answers.each do |comment| %>
   <p>
     <b>Comment:</b>
     <%= comment.content %>
@@ -74,11 +74,11 @@
 <% end %>
 
 
- CREACION DE UN NUEVO COMENTARIO 
+<!-- CREACION DE UN NUEVO COMENTARIO -->
 
 
 <h3>Add a comment:</h3>
-<%= form_for([@question, answer, answer.comments.build]) do |f| %>
+<%= form_for([@question, answer, answer.comment_answers.build]) do |f| %>
   <div class="field">
     <%= f.label :content %><br />
     <%= f.text_field :content %>
@@ -87,9 +87,10 @@
     <%= f.submit %>
   </div>
 <% end %>
--->
-
   <% end %>
+
+
+<!-- CREACION DE UNA NUEVA RESPUESTA -->
 
    <h2>Add a answer:</h2>
   <%= form_for([@question, @question.answers.build]) do |f| %>

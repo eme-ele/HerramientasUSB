@@ -1,11 +1,17 @@
 AskBeaver::Application.routes.draw do
 
+  resources :comment_answers
+
+
+  resources :comment_questions
+
+
   get "home/index"
 
   resources :questions do
-    resources :comments
+    resources :comment_questions
     resources :answers do
-      resources :comments
+      resources :comment_answers
     end
   end
 
