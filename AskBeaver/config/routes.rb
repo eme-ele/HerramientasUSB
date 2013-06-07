@@ -1,5 +1,7 @@
 AskBeaver::Application.routes.draw do
 
+  devise_for :users
+
   resources :comment_answers
 
 
