@@ -14,4 +14,5 @@ class User < ActiveRecord::Base
   def set_type
   	self.type ||= "NormalUser"
   end
+
 end

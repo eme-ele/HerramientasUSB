@@ -26,11 +26,7 @@ html, body, head {
 }
 
 #nav a:hover, a:active{
-	
-}
-
-#link a:link, a:visited {
-    color: #000;
+	background-color: #000;
 }
 
 #questions {

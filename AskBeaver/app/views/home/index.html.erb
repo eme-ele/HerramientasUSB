@@ -1,8 +1,25 @@
+<ul id="nav">
+	<% if user_signed_in? %>
+    	<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+    <% else %>
+    	<li><%= link_to "Sign in", new_user_session_path%></li>
+    <% end %>
+</ul>
+
 <h1><%= @hola %></h1>
-<%= link_to "Preguntas", questions_path %>
 
 <% if user_signed_in? %>
-   <p> <%= link_to "Sign out", destroy_user_session_path, :method => :delete %></p>
-<% else %>
-   <%= link_to "Sign in", new_user_session_path %></p>
+	<% if current_user.type == "Admin" %>
+		<div id="questions">
+			<%= link_to "Administrar Preguntas", questions_path, :style=>'color:#000' %>
+			<br>
+			<%= link_to "Administrar Usuarios", users_path, :style=>'color:#000' %>
+		</div>
+	<% else %>
+		<script type="text/javascript">
+    		window.location.href="/questions/"  // put your correct path in a string here
+  		</script>
+		</div>
+
+	<% end %>
 <% end %>

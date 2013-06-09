@@ -1,0 +1,34 @@
+<ul id="nav">
+  <% if user_signed_in? %>
+      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path%></li>
+    <% end %>
+</ul>
+
+
+<div id="questions">
+  <h1> Administrar Usuarios</h1>
+  <table>
+    <div id="table_index">
+      <tr>
+        <th>Email</th>
+        <th>Tipo</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </div>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.type %></td>
+      <td><%= link_to 'Edit', edit_user_path(user), :style=>'color:#000' %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <br />
+
+</div>

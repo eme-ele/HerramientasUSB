@@ -1,7 +1,11 @@
 <ul id="nav">
-    <li><a href="#signup">Sign Up</a></li>
-    <li><a href="#login">Log In</a></li>
+  <% if user_signed_in? %>
+      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path%></li>
+    <% end %>
 </ul>
+
 
 <p id="notice"><%= notice %></p>
 
@@ -16,8 +20,7 @@
     <%= @question.content %>
   </p>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<%= link_to 'Back', questions_path, :style=>'color:#000;' %>
 </div>
 
 <!-- COMENTARIOS CORRESPONDIENTES A UNA PREGUNTA -->
@@ -33,16 +36,17 @@
 
 <!-- CREACION DE UN NUEVO COMENTARIO -->
 
-
-  <h4>Add a comment:</h4>
-  <%= form_for([@question, @question.comment_questions.build]) do |f| %>
-    <div class="field">
-      <%= f.label :content %><br />
-      <%= f.text_field :content %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+  <% if current_user.type == "NormalUser"%>
+    <h4>Add a comment:</h4>
+    <%= form_for([@question, @question.comment_questions.build]) do |f| %>
+      <div class="field">
+        <%= f.label :content %><br />
+        <%= f.text_field :content %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
   <% end %>
 </div>
 
@@ -56,16 +60,14 @@
       <%= answer.content %>
     </p>  
     <p>
-    <%= link_to 'Destroy Answer', [answer.question, answer],
-                 :confirm => 'Are you sure?',
-                 :method => :delete %>
     </p>
+</div>
 
 
 <!-- COMENTARIOS CORRESPONDIENTES A UNA RESPUESTA -->
 
-
-<h3>Comments</h3>
+<div id="comments">
+<h4>Comments</h4>
 <% answer.comment_answers.each do |comment| %>
   <p>
     <b>Comment:</b>
@@ -76,24 +78,9 @@
 
 <!-- CREACION DE UN NUEVO COMENTARIO -->
 
-
-<h3>Add a comment:</h3>
-<%= form_for([@question, answer, answer.comment_answers.build]) do |f| %>
-  <div class="field">
-    <%= f.label :content %><br />
-    <%= f.text_field :content %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-  <% end %>
-
-
-<!-- CREACION DE UNA NUEVA RESPUESTA -->
-
-   <h2>Add a answer:</h2>
-  <%= form_for([@question, @question.answers.build]) do |f| %>
+<% if current_user.type == "NormalUser"%>
+  <h4>Add a comment:</h4>
+  <%= form_for([@question, answer, answer.comment_answers.build]) do |f| %>
     <div class="field">
       <%= f.label :content %><br />
       <%= f.text_field :content %>
@@ -102,4 +89,23 @@
       <%= f.submit %>
     </div>
   <% end %>
+  <% end %>
+<% end %>
 </div>
+
+
+<!-- CREACION DE UNA NUEVA RESPUESTA -->
+<% if current_user.type == "NormalUser"%>
+  <div id="answers">
+     <h2>Add an answer:</h2>
+    <%= form_for([@question, @question.answers.build]) do |f| %>
+      <div class="field">
+        <%= f.label :content %><br />
+        <%= f.text_field :content %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

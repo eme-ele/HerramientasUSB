@@ -1,16 +1,26 @@
 <ul id="nav">
-    <li><a href="users/sign_up">Sign Up</a></li>
-    <li><a href="users/sign_in">Log In</a></li>
+  <% if user_signed_in? %>
+      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path%></li>
+    <% end %>
 </ul>
 
 
 <div id="questions">
-  <h1> Administrar Preguntas</h1>
+
+  <!-- Preguntas -->
+  <% if current_user.type == "Admin" %>
+    <h1> Administrar Preguntas</h1>
+  <% else %>
+    <h1> Preguntas</h1>
+  <% end %>
+
   <table>
     <div id="table_index">
       <tr>
-        <th>Title</th>
-        <th>Content</th>
+        <th>Titulo</th>
+        <th>Contenido</th>
         <th></th>
         <th></th>
         <th></th>
@@ -21,14 +31,21 @@
     <tr>
       <td id="title"><%= question.title %></td>
       <td><%= question.content %></td>
-      <td><%= link_to 'Show', question %></td>
-      <td><%= link_to 'Edit', edit_question_path(question) %></td>
-      <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= link_to 'Show', question, :style=>'color:#000' %></td>
+
+      <!-- Si es administrador, permitir editar y destruir -->
+      <% if current_user.type == "Admin"%>
+        <td><%= link_to 'Edit', edit_question_path(question), :style=>'color:#000' %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }, :style=>'color:#000;' %></td>
+      <% end %>
+
     </tr>
   <% end %>
   </table>
 
   <br />
 
-  <%= link_to 'New Question', new_question_path %>
+  <% if current_user.type == "NormalUser" %>
+    <%= link_to 'Hacer una nueva pregunta', new_question_path %>
+  <% end %>
 </div>

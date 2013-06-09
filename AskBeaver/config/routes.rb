@@ -1,12 +1,9 @@
 AskBeaver::Application.routes.draw do
 
+
   devise_for :users
 
-  resources :comment_answers
-
-
-  resources :comment_questions
-
+  resources :users, :only => [:index, :edit, :update], :controller => "users"
 
   get "home/index"
 
