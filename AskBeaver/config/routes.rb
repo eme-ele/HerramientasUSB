@@ -11,9 +11,11 @@ AskBeaver::Application.routes.draw do
     resources :comment_questions
     resources :answers do
       resources :comment_answers
+      resources :votes
     end
   end
 
+  match 'questions/user/current' => 'questions#personal_index' , :as => :personal_index
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

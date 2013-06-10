@@ -10,6 +10,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def personal_index
+    @questions = Question.where('user_id = ?', current_user.id)
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @questions }
+
+    end
+  end
+
+
   # GET /questions/1
   # GET /questions/1.json
   def show
@@ -39,8 +49,8 @@ class QuestionsController < ApplicationController
   # POST /questions
   # POST /questions.json
   def create
-    @question = Question.new(params[:question])
-
+    @question = Question.new(params[:question].except(:user_id))
+    @question.user_id = current_user.id
     respond_to do |format|
       if @question.save
         format.html { redirect_to @question, notice: 'Question was successfully created.' }
@@ -80,3 +90,4 @@ class QuestionsController < ApplicationController
     end
   end
 end
+

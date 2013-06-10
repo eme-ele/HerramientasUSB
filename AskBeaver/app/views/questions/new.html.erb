@@ -1,7 +1,14 @@
 <ul id="nav">
-    <li><a href="#signup">Sign Up</a></li>
-    <li><a href="#login">Log In</a></li>
+
+  <% if user_signed_in? %>
+      <li><%= current_user.email%></li>
+      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+
+    <% else %>
+      <li><%= link_to "Sign in", new_user_session_path%></li>
+    <% end %>
 </ul>
+
 
 <div id="questions">
 

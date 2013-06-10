@@ -11,7 +11,9 @@ class CommentAnswersController < ApplicationController
   def create
     @answer = Answer.find(params[:answer_id])
     @question = Question.find(@answer.question_id)
-    @comment_answer = @answer.comment_answers.create(params[:comment_answer])
+    @comment_answer = @answer.comment_answers.create(params[:comment_answer].except(:user_id))
+    @comment_answer.user_id = current_user.id
+    @comment_answer.save
     redirect_to question_path(@question)
   end
   

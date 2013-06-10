@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :type
   # attr_accessible :title, :body
-
+  has_many :votes, :dependent => :destroy
   def set_type
   	self.type ||= "NormalUser"
   end

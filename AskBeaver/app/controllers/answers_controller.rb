@@ -10,7 +10,9 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = @question.answers.create(params[:answer])
+    @answer = @question.answers.create(params[:answer].except(:user_id))
+    @answer.user_id = current_user.id
+    @answer.save
     redirect_to question_path(@question)
   end
   
@@ -18,6 +20,17 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
     @answer.destroy
+    redirect_to question_path(@question)
+  end
+
+
+
+  # PUT /questions/1
+  # PUT /questions/1.json
+  def update
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.find(params[:id])
+    @answer.update_attributes(params[:answer])
     redirect_to question_path(@question)
   end
 end

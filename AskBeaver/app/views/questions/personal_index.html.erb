@@ -10,12 +10,8 @@
 
 <div id="questions">
 
-  <!-- Preguntas -->
-  <% if current_user.type == "Admin" %>
-    <h1> Administrar Preguntas</h1>
-  <% else %>
-    <h1> Preguntas</h1>
-  <% end %>
+  <h1> Preguntas Personales</h1>
+
 
   <table>
     <div id="table_index">
@@ -33,12 +29,6 @@
       <td id="title"><%= question.title %></td>
       <td><%= question.content %></td>
       <td><%= link_to 'Show', question, :style=>'color:#000' %></td>
-
-      <!-- Si es administrador, permitir editar y destruir -->
-      <% if current_user.type == "Admin"%>
-        <td><%= link_to 'Edit', edit_question_path(question), :style=>'color:#000' %></td>
-        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' }, :style=>'color:#000;' %></td>
-      <% end %>
 
     </tr>
   <% end %>

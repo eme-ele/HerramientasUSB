@@ -1,8 +1,9 @@
 <ul id="nav">
-	<% if user_signed_in? %>
-    	<li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+  <% if user_signed_in? %>
+      <li><%= current_user.email%></li>
+      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
     <% else %>
-    	<li><%= link_to "Sign in", new_user_session_path%></li>
+      <li><%= link_to "Sign in", new_user_session_path%></li>
     <% end %>
 </ul>
 
@@ -16,10 +17,12 @@
 			<%= link_to "Administrar Usuarios", users_path, :style=>'color:#000' %>
 		</div>
 	<% else %>
-		<script type="text/javascript">
-    		window.location.href="/questions/"  // put your correct path in a string here
-  		</script>
+		<div id="questions">
+			<%= link_to "Preguntas Personales" , personal_index_path , :style=>'color:#000' %>
+			<br>
+			<%= link_to "Preguntas", questions_path, :style=>'color:#000' %>
 		</div>
+		
 
 	<% end %>
 <% end %>
