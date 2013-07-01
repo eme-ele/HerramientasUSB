@@ -77,7 +77,7 @@ class QuestionsController < ApplicationController
       end
     end
   end
-
+ 
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy

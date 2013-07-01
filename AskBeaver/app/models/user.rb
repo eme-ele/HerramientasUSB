@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  after_initialize :set_type
+  after_initialize :set_user_type
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -8,11 +8,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :type
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :user_type
   # attr_accessible :title, :body
   has_many :votes, :dependent => :destroy
-  def set_type
-  	self.type ||= "NormalUser"
+  def set_user_type
+  	self.user_type ||= "NormalUser"
   end
 
 end

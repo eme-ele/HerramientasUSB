@@ -13,19 +13,10 @@
 <p id="notice"><%= notice %></p>
 
 <div id="questions">
-  <h1>
-    <b>Title:</b>
-    <%= @question.title %>
-  </h1>
-  <h10>
-    question made by user: <%= User.find(@question.user_id).email %>
-  </h10>
-  <p>
-    <b>Content:</b>
-    <%= @question.content %>
-  </p>
-
-  <%= link_to 'Back', questions_path, :style=>'color:#000;' %>
+  <h1><b>Title: </b><%= @question.title %></h1>
+  <h10>question made by user: <%= User.find(@question.user_id).email %></h10>
+  <p><b>Content: </b><%= @question.content %></p>
+  <%= link_to 'Back', :back, :style=>'color:#000;' %>
 </div>
 
 <!-- COMENTARIOS CORRESPONDIENTES A UNA PREGUNTA -->
@@ -33,25 +24,17 @@
 <div id="comments">
   <h4>Comments</h4>
   <% @question.comment_questions.each do |comment| %>
-    <p>
-      <!--   <b>Comment:</b>-->
-      <%= comment.content %> -- <%= User.find(comment.user_id).email %>
-    </p> 
-
+    <p><%= comment.content %> -- <%= User.find(comment.user_id).email %></p> 
   <% end %>
+
 
 <!-- CREACION DE UN NUEVO COMENTARIO -->
 
-  <% if current_user.type == "NormalUser"%>
+  <% if current_user.user_type == "NormalUser"%>
     <h4>Add a comment:</h4>
     <%= form_for([@question, @question.comment_questions.build]) do |f| %>
-      <div class="field">
-        <%= f.label :content %><br />
-        <%= f.text_field :content %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
+      <div class="field"> <%= f.label :content %><br><%= f.text_field :content %></div>
+      <div class="actions"> <%= f.submit %></div>
     <% end %>
   <% end %>
 </div>
@@ -60,7 +43,9 @@
 
 <div id="answers">
   <h2>Answers</h2>
+</div>
   <% @question.answers.each do |answer| %>
+<div id="answers">
     <p>
       <b>Answer:</b>
       <%= answer.content %> -- <%= User.find(answer.user_id).email %>
@@ -73,7 +58,7 @@
         <% end %>
 
       <% end %>
-      <% if !has_voted? %>
+      <% if !has_voted? and current_user.user_type == "NormalUser" %>
           <%= form_for([@question, answer, answer.votes.build]) do |f| %>
             <%= f.radio_button(:qualification, 't') %>
             <%= f.label(:qualification, 'like') %>
@@ -92,32 +77,27 @@
 <div id="comments">
   <h4>Comments</h4>
   <% answer.comment_answers.each do |comment| %>
-    <p>
-      <b>Comment:</b>
-      <%= comment.content %> -- <%= User.find(comment.user_id).email %>
-    </p> 
+    <p><%= comment.content %> -- <%= User.find(comment.user_id).email %></p> 
   <% end %>
 
 <!-- CREACION DE UN NUEVO COMENTARIO -->
 
-  <% if current_user.type == "NormalUser"%>
+  <% if current_user.user_type == "NormalUser"%>
     <h4>Add a comment:</h4>
     <%= form_for([@question, answer, answer.comment_answers.build]) do |f| %>
-      <div class="field">
-        <%= f.label :content %><br />
-        <%= f.text_field :content %>
-      </div>
-      <div class="actions">
-        <%= f.submit %>
-      </div>
+      <div class="field"><%= f.label :content %><br><%= f.text_field :content %></div>
+      <div class="actions"><%= f.submit %></div>
     <% end %>
   <% end %>
-<% end %>
+  
 </div>
+<br><br>
+<% end %>
+
 
 
 <!-- CREACION DE UNA NUEVA RESPUESTA -->
-<% if current_user.type == "NormalUser" and @question.user_id != current_user.id%>
+<% if current_user.user_type == "NormalUser" and @question.user_id != current_user.id%>
   <div id="answers">
      <h2>Add an answer:</h2>
     <%= form_for([@question, @question.answers.build]) do |f| %>

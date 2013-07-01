@@ -36,7 +36,8 @@
 
   <br />
 
-  <% if current_user.type == "NormalUser" %>
+  <% if current_user.user_type == "NormalUser" %>
     <%= link_to 'Hacer una nueva pregunta', new_question_path ,:style=>'color:#000'%>
   <% end %>
+  <%= link_to 'Back', questions_path, :style=>'color:#000;' %>
 </div>

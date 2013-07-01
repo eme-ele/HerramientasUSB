@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130609233447) do
+ActiveRecord::Schema.define(:version => 20130618174503) do
 
   create_table "answers", :force => true do |t|
     t.text     "content"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20130609233447) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "type"
+    t.string   "user_type"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end

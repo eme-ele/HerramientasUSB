@@ -1,8 +1,8 @@
 AskBeaver::Application.routes.draw do
 
-  resources :users, :only => [:index, :edit, :update], :controller => "users"
+  resources :users
 
-  devise_for :users
+  devise_for :users, :path_prefix => 'd'
 
   get "home/index"
 

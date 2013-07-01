@@ -9,4 +9,5 @@ class VotesController < ApplicationController
     redirect_to question_path(@question)
   end
 
+
 end
