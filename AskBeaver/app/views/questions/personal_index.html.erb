@@ -1,29 +1,51 @@
-<ul id="nav">
-  <% if user_signed_in? %>
-      <li><%= current_user.email%></li>
-      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-    <% else %>
-      <li><%= link_to "Sign in", new_user_session_path%></li>
-    <% end %>
-</ul>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <%= link_to 'Ask Beaver', home_index_path, :class=>"brand"%>
+            <div class="nav-collapse collapse">
+              <ul class="nav pull-right">
+                <% if user_signed_in? %>
+                <li><a href="#user"><%= current_user.email%></a><li>
+                <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+                <% else %>
+              <li><%= link_to "Sign in", new_user_session_path%></li>
+            <% end %>
+          </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
 
 
-<div id="questions">
+<br>
+<div class="container">
+  <!-- Preguntas -->
+  <div class="hero-unit">
 
   <h1> Preguntas Personales</h1>
+</div>
 
 
-  <table>
-    <div id="table_index">
+  <table class="table table-bordered table-striped">
+    <thead>
+      <colgroup>
+      <col class="span5">
+      <col class="span5">
+      <col class="span1">
+    </colgroup>
       <tr>
         <th>Titulo</th>
         <th>Contenido</th>
         <th></th>
-        <th></th>
-        <th></th>
       </tr>
-    </div>
+    </thead>
 
+  <tbody>
   <% @questions.each do |question| %>
     <tr>
       <td id="title"><%= question.title %></td>
@@ -32,12 +54,12 @@
 
     </tr>
   <% end %>
+</tbody>
   </table>
 
   <br />
 
   <% if current_user.user_type == "NormalUser" %>
-    <%= link_to 'Hacer una nueva pregunta', new_question_path ,:style=>'color:#000'%>
+    <%= link_to 'Nueva pregunta', new_question_path , :class=>"btn btn-primary", :style=>'color:#FFF' %>
   <% end %>
-  <%= link_to 'Back', questions_path, :style=>'color:#000;' %>
 </div>

@@ -37,4 +37,4 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 gem 'devise'
-gem 'composite_primary_keys' , '=5.0.13'
+gem 'simple_form'

@@ -1,28 +1,39 @@
-<ul id="nav">
+ <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <%= link_to 'Ask Beaver', home_index_path, :class=>"brand"%>
+            
+        </div>
+    </div>
+</div>
 
-  <% if user_signed_in? %>
-      <li><%= current_user.email%></li>
-      <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+<br>
+<div class="container">
 
-    <% else %>
-      <li><%= link_to "Sign in", new_user_session_path%></li>
-    <% end %>
-</ul>
-
-
-<div id="questions">
+ <div class="hero-unit">
   <h1> Administrar Usuarios</h1>
-  <table>
-    <div id="table_index">
+</div><br>
+
+    <table class="table table-bordered table-striped">  
+    <colgroup>
+      <col class="span2">
+      <col class="span2">
+      <col class="span1">
+    </colgroup>  
+    <thead>
       <tr>
         <th>Email</th>
         <th>Tipo</th>
         <th></th>
-        <th></th>
-        <th></th>
       </tr>
-    </div>
+    </thead>
 
+ <tbody>
   <% @users.each do |user| %>
     <tr>
       <td><%= user.email %></td>
@@ -30,6 +41,7 @@
       <td><%= link_to 'Edit', edit_user_path(user), :style=>'color:#000' %></td>
     </tr>
   <% end %>
+</tbody>
   </table>
 
   <br />
