@@ -64,12 +64,15 @@
         <br> Did you like this answer? -- </br>
         <%= form_for([@question, answer]) do |f| %>
           <%= f.check_box :validation %>
-          <%= f.submit 'Accept'%>
+          <%= f.submit 'Validate'%>
         <% end %>
 
       <% end %>
-      <h1> Gusta <%= how_many_votes_true(answer) %> </h1>
-      <h1> No gusta <%= how_many_votes_false(answer) %> </h1>
+      <% if accepted(answer) %>
+        <h3> Respuesta aceptada </h3>
+      <% end %>
+      <p> Gusta <%= how_many_votes_true(answer) %> </p>
+      <p> No gusta <%= how_many_votes_false(answer) %> </p>
       <% if !has_voted(answer) and current_user.user_type == "NormalUser" %>
           <%= form_for([@question, answer, answer.votes.build]) do |f| %>
             

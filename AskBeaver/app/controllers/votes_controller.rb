@@ -10,4 +10,13 @@ class VotesController < ApplicationController
   end
 
 
+  def destroy
+	@answer = Answer.find(params[:answer_id])
+    @vote = @answer.votes.find(params[:id])
+    @vote.destroy
+    redirect_to question_path(@question)
+  end
+
+
+
 end

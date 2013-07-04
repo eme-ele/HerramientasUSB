@@ -1,7 +1,7 @@
 module AnswersHelper
 
-	def how_many_votes?
-		
+	def accepted(answer)
+		return answer.validation
 		
 	end
 end
