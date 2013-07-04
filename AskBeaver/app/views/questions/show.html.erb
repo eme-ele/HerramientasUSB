@@ -66,8 +66,11 @@
         <% end %>
 
       <% end %>
+      <h1> Gusta <%= how_many_votes_true(answer) %> </h1>
+      <h1> No gusta <%= how_many_votes_false(answer) %> </h1>
       <% if !has_voted? and current_user.user_type == "NormalUser" %>
           <%= form_for([@question, answer, answer.votes.build]) do |f| %>
+            
             <%= f.radio_button(:qualification, 't') %>
             <%= f.label(:qualification, 'like') %>
             <%= f.radio_button(:qualification, 'f') %>
