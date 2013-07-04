@@ -1,9 +1,7 @@
 module VotesHelper
 
-	def has_voted?
-		return Vote.where('user_id = ?', current_user.id).exists?
-
-		
+	def has_voted(answer)
+		return Vote.where('answer_id = ? and user_id = ?', answer.id, current_user.id).exists?		
 	end
 
 

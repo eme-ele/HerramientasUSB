@@ -1,3 +1,4 @@
+<!-- start navigation bar -->
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -16,17 +17,18 @@
               <li><%= link_to "Sign in", new_user_session_path%></li>
             <% end %>
           </ul>
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </div>
 </div>
+<!-- end navigation bar -->
 
 
 <p id="notice"><%= notice %></p>
 
 <div class="container">
   <h1><b>Title: </b><%= @question.title %></h1>
-  <h10>question made by user: <%= User.find(@question.user_id).email %></h10>
+  <h10>question made by user: <%= get_user_email(@question) %></h10>
   <p><b>Content: </b><%= @question.content %></p>
 
 <!-- COMENTARIOS CORRESPONDIENTES A UNA PREGUNTA -->
@@ -34,7 +36,7 @@
 <div class="comment-level">
   <h4>Comments</h4>
   <% @question.comment_questions.each do |comment| %>
-    <p><%= comment.content %> -- <%= User.find(comment.user_id).email %></p> 
+    <p><%= comment.content %> -- <%= get_user_email(@question) %></p> 
   <% end %>
 
 
@@ -56,7 +58,7 @@
   <% @question.answers.each do |answer| %>
     <p>
       <b>Answer:</b>
-      <%= answer.content %> -- <%= User.find(answer.user_id).email %>
+      <%= answer.content %> -- <%= get_user_email(@question) %>
       <!--ACEPTAR PREGUNTA COMO CORRECTA-->
       <% if @question.user_id == current_user.id %>
         <br> Did you like this answer? -- </br>
@@ -68,7 +70,7 @@
       <% end %>
       <h1> Gusta <%= how_many_votes_true(answer) %> </h1>
       <h1> No gusta <%= how_many_votes_false(answer) %> </h1>
-      <% if !has_voted? and current_user.user_type == "NormalUser" %>
+      <% if !has_voted(answer) and current_user.user_type == "NormalUser" %>
           <%= form_for([@question, answer, answer.votes.build]) do |f| %>
             
             <%= f.radio_button(:qualification, 't') %>
@@ -87,7 +89,7 @@
 <div class="comment-level">
   <h4>Comments</h4>
   <% answer.comment_answers.each do |comment| %>
-    <p><%= comment.content %> -- <%= User.find(comment.user_id).email %></p> 
+    <p><%= comment.content %> -- <%= get_user_email(@question) %></p> 
   <% end %>
 
 <!-- CREACION DE UN NUEVO COMENTARIO -->
