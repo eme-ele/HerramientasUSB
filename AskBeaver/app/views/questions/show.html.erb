@@ -73,17 +73,20 @@
       <% end %>
       <p> Gusta <%= how_many_votes_true(answer) %> </p>
       <p> No gusta <%= how_many_votes_false(answer) %> </p>
-      <% if !has_voted(answer) and current_user.user_type == "NormalUser" %>
-          <%= form_for([@question, answer, answer.votes.build]) do |f| %>
-            
-            <%= f.radio_button(:qualification, 't') %>
-            <%= f.label(:qualification, 'like') %>
-            <%= f.radio_button(:qualification, 'f') %>
-            <%= f.label(:qualification, 'dislike') %>
-            <%= f.submit 'Vote!'%>
-          <% end %>
+      <% if current_user.user_type == "NormalUser" %>
+        <% if !has_voted(answer) %>
+            <%= form_for([@question, answer, answer.votes.build]) do |f| %>
+              
+              <%= f.radio_button(:qualification, 't') %>
+              <%= f.label(:qualification, 'like') %>
+              <%= f.radio_button(:qualification, 'f') %>
+              <%= f.label(:qualification, 'dislike') %>
+              <%= f.submit 'Vote!'%>
+            <% end %>
+        <% else %>
+          <%= link_to 'Unvote', find_vote(answer), :confirm => 'Are you sure?', :method => :delete %> 
+        <% end %>
       <% end %>
-
     </p>  
 
 
