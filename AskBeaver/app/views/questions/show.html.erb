@@ -83,7 +83,7 @@
               <%= f.label(:qualification, 'dislike') %>
               <%= f.submit 'Vote!'%>
             <% end %>
-        <% else %>
+        <% elsif has_voted(answer) %>
           <%= link_to 'Unvote', find_vote(answer), :confirm => 'Are you sure?', :method => :delete %> 
         <% end %>
       <% end %>

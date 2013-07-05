@@ -14,6 +14,7 @@ module VotesHelper
 	end
 
 	def find_vote(answer)
-		return Vote.where('answer_id = ? and user_id = ?', answer.id, current_user.id)
+		return Vote.find(:first, :conditions => ["answer_id = ? and user_id = ?", answer.id, current_user.id])
+
 	end
 end
