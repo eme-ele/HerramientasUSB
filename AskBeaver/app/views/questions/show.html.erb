@@ -36,7 +36,7 @@
 <div class="comment-level">
   <h4>Comments</h4>
   <% @question.comment_questions.each do |comment| %>
-    <p><%= comment.content %> -- <%= get_user_email(@question) %></p> 
+    <p><%= comment.content %> -- <%= get_user_email(comment) %></p> 
   <% end %>
 
 
@@ -58,7 +58,7 @@
   <% @question.answers.each do |answer| %>
     <p>
       <b>Answer:</b>
-      <%= answer.content %> -- <%= get_user_email(@question) %>
+      <%= answer.content %> -- <%= get_user_email(answer) %>
       <!--ACEPTAR PREGUNTA COMO CORRECTA-->
       <% if @question.user_id == current_user.id %>
         <br> Did you like this answer? -- </br>
@@ -95,7 +95,7 @@
 <div class="comment-level">
   <h4>Comments</h4>
   <% answer.comment_answers.each do |comment| %>
-    <p><%= comment.content %> -- <%= get_user_email(@question) %></p> 
+    <p><%= comment.content %> -- <%= get_user_email(comment) %></p> 
   <% end %>
 
 <!-- CREACION DE UN NUEVO COMENTARIO -->
