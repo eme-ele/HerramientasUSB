@@ -1,0 +1,14 @@
+<!-- app/Resources/views/base.html.twig -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+        <title>{% block title %}symblog{% endblock %} - symblog</title>
+    </head>
+    <body>
+    	<h1>{% block level %}{% endblock %}</h1>
+        {% block extension %}{% endblock %}
+        <p>{% block redirect%}{% endblock %}</p>
+    </body>
+
+</html>
