@@ -1,5 +1,13 @@
-{% extends 'JokerJokeBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
-{% block level %}Index de mi pagina de chistes{% endblock %}
+{% block body-%}
+    <h1>Index de mi pagina de chistes</h1> 
+    <ul>
+        <li>
+            <a href="{{ path('post') }}">
+                Ver todos los chistes
+            </a>
+        </li>
+    </ul>
+{% endblock %}
 
-{% block redirect %}<p><a href="{{ path('post') }}">Jokes</a></p>{% endblock %}

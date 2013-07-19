@@ -16,6 +16,3 @@ JokerJokeBundle_comment_create:
         _method: POST
         post_id: \d+
 
-joker_joke_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: JokerJokeBundle:Default:index }
